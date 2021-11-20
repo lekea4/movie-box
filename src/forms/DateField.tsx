@@ -1,16 +1,17 @@
 import { useFormikContext } from "formik";
 
-export default function DateField(props: datefieldProps) {
+export default function DateField(props: dateFieldProps) {
   const { values, validateForm, touched, errors } = useFormikContext<any>();
   return (
     <div className="mb-3">
       <label htmlFor={props.field}>{props.displayName}</label>
+
       <input
         type="date"
         className="form-control"
         id={props.field}
         name={props.field}
-        defaultValue={values[props.field]?.tolocaleDateString("en-CA")}
+        defaultValue={values[props.field]?.toLocaleDateString("en-CA")}
         onChange={(e) => {
           const date = new Date(e.currentTarget.value + "T00:00:00");
           values[props.field] = date;
@@ -18,13 +19,13 @@ export default function DateField(props: datefieldProps) {
         }}
       />
       {touched[props.field] && errors[props.field] ? (
-        <div className="text-danger">{errors[props.field]?.toString}</div>
+        <div className="text-danger">{errors[props.field]?.toString()}</div>
       ) : null}
     </div>
   );
 }
 
-interface datefieldProps {
+interface dateFieldProps {
   field: string;
   displayName: string;
 }
