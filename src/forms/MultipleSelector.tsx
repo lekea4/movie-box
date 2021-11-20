@@ -1,4 +1,5 @@
-import "./MultipleSelector";
+import "./MultipleSelector.css";
+
 export default function MultipleSelector(props: multipleSelectorProps) {
   function select(item: multipleSelectorModel) {
     const selected = [...props.selected, item];
@@ -13,15 +14,17 @@ export default function MultipleSelector(props: multipleSelectorProps) {
   }
 
   function selectAll() {
-    const selected = [...props.nonSelected, ...props.nonSelected];
+    const selected = [...props.selected, ...props.nonSelected];
     const nonSelected: multipleSelectorModel[] = [];
     props.onChange(selected, nonSelected);
   }
+
   function deselectAll() {
     const nonSelected = [...props.nonSelected, ...props.selected];
     const selected: multipleSelectorModel[] = [];
     props.onChange(selected, nonSelected);
   }
+
   return (
     <div className="mb-3">
       <label>{props.displayName}</label>
@@ -42,7 +45,7 @@ export default function MultipleSelector(props: multipleSelectorProps) {
           </button>
         </div>
         <ul>
-          {props.nonSelected.map((item) => (
+          {props.selected.map((item) => (
             <li key={item.key} onClick={() => deselect(item)}>
               {item.value}
             </li>

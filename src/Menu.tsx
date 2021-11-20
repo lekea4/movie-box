@@ -5,7 +5,7 @@ export default function Menu() {
     <nav className="navbar navbar-expand-sm navbar-dark bg-success border-bottom box-shadow mb-3 ">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">
-          Movies
+          MovieBox
         </NavLink>
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">

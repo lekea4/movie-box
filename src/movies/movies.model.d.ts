@@ -10,6 +10,8 @@ export interface movieCreationDTO {
   releaseDate?: Date;
   poster?: file;
   posterUrl?: string;
+  genresIds?: number[];
+  movieCinemasIds?: number[];
 }
 
 export interface landingPageDTO {
