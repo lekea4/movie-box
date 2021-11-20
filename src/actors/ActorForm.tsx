@@ -8,14 +8,16 @@ import DateField from "../forms/DateField";
 
 export default function ActorForm(props: actorFormProps) {
   return (
-    <Formik initialValues={props.model} onSubmit={props.onSubmit}>
-      validationSchema=
-      {Yup.object({
+    <Formik
+      initialValues={props.model}
+      onSubmit={props.onSubmit}
+      validationSchema={Yup.object({
         name: Yup.string()
           .required("This field is required")
           .firstLetterUppercase(),
         dateOfBirth: Yup.date().nullable().required("This field is required"),
       })}
+    >
       {(formikProps) => (
         <Form>
           <TextField displayName="Name" field="name" />
@@ -34,8 +36,8 @@ export default function ActorForm(props: actorFormProps) {
 
 interface actorFormProps {
   model: actorCreationDTO;
-  onSubmit: (
+  onSubmit(
     values: actorCreationDTO,
     action: FormikHelpers<actorCreationDTO>
-  ) => void;
+  ): void;
 }
