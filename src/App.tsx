@@ -20,6 +20,11 @@ function App() {
           ))}
         </Switch>
       </div>
+      <footer className="bd-footer py-5 mt-5 bg-light border-top footer text-muted">
+        <div className="container-fluid text-center">
+          &copy;{new Date().getFullYear().toString()} - MovieBox
+        </div>
+      </footer>
     </BrowserRouter>
   );
 }

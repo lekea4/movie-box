@@ -1,3 +1,4 @@
+import { actorMovieDTO } from "../actors/actors.model";
 import { movieCinemaDTO } from "../cinemas/movieCinema.model";
 import { genreDTO } from "../genres/genres.model";
 import MovieForm from "./MovieForm";
@@ -14,6 +15,15 @@ export default function EditMovie() {
 
   const selectedMovieCinemas: movieCinemaDTO[] = [{ id: 1, name: "Filmhouse" }];
 
+  const selectedActors: actorMovieDTO[] = [
+    {
+      id: 1,
+      name: "Felipe",
+      character: "Geralt",
+      picture:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Tom_Holland_by_Gage_Skidmore.jpg/220px-Tom_Holland_by_Gage_Skidmore.jpg",
+    },
+  ];
   return (
     <>
       <h3>Edit Movie</h3>
@@ -29,6 +39,7 @@ export default function EditMovie() {
         selectedGenres={selectedGenres}
         nonSelectedMovieCinemas={nonSelectedMovieCinemas}
         selectedMovieCinemas={selectedMovieCinemas}
+        selectedActors={selectedActors}
       />
     </>
   );
