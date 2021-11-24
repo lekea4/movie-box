@@ -7,21 +7,26 @@ export default function Pagination(props: paginationProps) {
     if (link.page === props.currentPage) {
       return;
     }
+
     if (!link.enabled) {
       return;
     }
-    props.onchange(link.page);
+
+    props.onChange(link.page);
   }
 
   function getClass(link: linkModel) {
     if (link.active) {
       return "active pointer";
     }
-    if (link.enabled) {
-      return "pointer";
+
+    if (!link.enabled) {
+      return "disabled";
     }
+
     return "pointer";
   }
+
   useEffect(() => {
     const previousPageEnabled = props.currentPage !== 1;
     const previousPage = props.currentPage - 1;
@@ -91,5 +96,9 @@ interface paginationProps {
   currentPage: number;
   totalAmountOfPages: number;
   radio: number;
-  onchange(page: number): void;
+  onChange(page: number): void;
 }
+
+Pagination.defaultProps = {
+  radio: 3,
+};
