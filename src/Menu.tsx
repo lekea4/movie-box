@@ -28,7 +28,7 @@ export default function Menu() {
             </li>
 
             <li className="nav-item">
-              <NavLink className="nav-link" to="/cinemas">
+              <NavLink className="nav-link" to="/moviecinemas">
                 Cinema
               </NavLink>
             </li>

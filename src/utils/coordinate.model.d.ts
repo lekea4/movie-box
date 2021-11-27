@@ -1,4 +1,5 @@
-export default interface coordinate {
+export default interface coordinateDTO {
   lng: number;
   lat: number;
+  name?: string;
 }

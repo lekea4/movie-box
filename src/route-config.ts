@@ -7,12 +7,13 @@ import LandingPage from "./movies/LandingPage";
 import IndexActors from "./actors/IndexActors";
 import CreateActor from "./actors/CreateActor";
 import EditActor from "./actors/EditActor";
-import IndexCinemas from "./cinemas/IndexCinemas";
-import CreateCinema from "./cinemas/CreateCinema";
-import EditCinema from "./cinemas/EditCinema";
+import IndexMovieCinemas from "./moviecinemas/IndexMovieCinemas";
+import CreateMovieCinema from "./moviecinemas/CreateMovieCinema";
+import EditMovieCinema from "./moviecinemas/EditMovieCinema";
 import CreateMovie from "./movies/CreateMovie";
 import EditMovie from "./movies/EditMovie";
 import FilterMovies from "./movies/FilterMovies";
+import MovieDetails from "./movies/MovieDetails";
 import RedirectToLandingPage from "./utils/RedirectToLandingPage";
 
 const routes = [
@@ -24,13 +25,14 @@ const routes = [
   { path: "/actors/create", component: CreateActor },
   { path: "/actors/edit/:id(\\d+)", component: EditActor },
 
-  { path: "/cinemas", component: IndexCinemas, exact: true },
-  { path: "/cinemas/create", component: CreateCinema },
-  { path: "/cinemas/edit/:id(\\d+)", component: EditCinema },
+  { path: "/moviecinemas", component: IndexMovieCinemas, exact: true },
+  { path: "/moviecinemas/create", component: CreateMovieCinema },
+  { path: "/moviecinemas/edit/:id(\\d+)", component: EditMovieCinema },
 
   { path: "/movies/create", component: CreateMovie },
   { path: "/movies/edit/:id(\\d+)", component: EditMovie },
   { path: "/movies/filter", component: FilterMovies },
+  { path: "/movies/:id(\\d+)", component: MovieDetails },
 
   { path: "/", component: LandingPage, exact: true },
   { path: "*", component: RedirectToLandingPage },

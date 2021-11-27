@@ -1,31 +1,67 @@
-import { movieCinemaDTO } from "../cinemas/movieCinema.model";
+import axios, { AxiosResponse } from "axios";
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { urlMovies } from "../endpoints";
 import { genreDTO } from "../genres/genres.model";
+import { movieCinemaDTO } from "../moviecinemas/movieCinema.model";
+import DisplayErrors from "../utils/DisplayErrors";
+import { convertMovieToFormData } from "../utils/formDataUtils";
+import Loading from "../utils/Loading";
 import MovieForm from "./MovieForm";
+import { movieCreationDTO, moviesPostGetDTO } from "./movies.model";
 
 export default function CreateMovie() {
-  const nonSelectedGenres: genreDTO[] = [
-    { id: 1, name: "Comedy" },
-    { id: 2, name: "Drama" },
-    { id: 3, name: "Action" },
-  ];
+  const [nonSelectedGenres, setNonSelectedGenres] = useState<genreDTO[]>([]);
+  const [nonSelectedMovieCinemas, setNonSelectedMovieCinemas] = useState<
+    movieCinemaDTO[]
+  >([]);
+  const [loading, setLoading] = useState(true);
+  const [errors, setErrors] = useState<string[]>([]);
+  const history = useHistory();
 
-  const nonSelectedMovieCinemas: movieCinemaDTO[] = [
-    { id: 1, name: "Filmhouse" },
-    { id: 2, name: "Genesis" },
-    { id: 3, name: "SilverBird Cinemas" },
-  ];
+  useEffect(() => {
+    axios
+      .get(`${urlMovies}/postget`)
+      .then((response: AxiosResponse<moviesPostGetDTO>) => {
+        setNonSelectedGenres(response.data.genres);
+        setNonSelectedMovieCinemas(response.data.movieCinemas);
+        setLoading(false);
+      });
+  }, []);
+
+  async function create(movie: movieCreationDTO) {
+    try {
+      const formData = convertMovieToFormData(movie);
+      const response = await axios({
+        method: "post",
+        url: urlMovies,
+        data: formData,
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      history.push(`/movie/${response.data}`);
+    } catch (error: any) {
+      if (errors && error.response) setErrors(error.response.data);
+    }
+  }
+
   return (
     <>
       <h3>Create Movie</h3>
-      <MovieForm
-        model={{ title: "", inCinemas: false, trailer: "" }}
-        onsubmit={(values) => console.log(values)}
-        nonSelectedGenres={nonSelectedGenres}
-        selectedGenres={[]}
-        nonSelectedMovieCinemas={nonSelectedMovieCinemas}
-        selectedMovieCinemas={[]}
-        selectedActors={[]}
-      />
+      <DisplayErrors errors={errors} />
+      {loading ? (
+        <Loading />
+      ) : (
+        <MovieForm
+          model={{ title: "", inCinemas: false, trailer: "" }}
+          onSubmit={async (values) => await create(values)}
+          nonSelectedGenres={nonSelectedGenres}
+          selectedGenres={[]}
+          nonSelectedMovieCinemas={nonSelectedMovieCinemas}
+          selectedMovieCinemas={[]}
+          selectedActors={[]}
+        />
+      )}
     </>
   );
 }
