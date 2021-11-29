@@ -27,12 +27,6 @@ export default function MovieCinemaForm(props: movieCinemaForm) {
         _name: Yup.string()
           .required("This field is required")
           .firstLetterUppercase(),
-        get name() {
-          return this._name;
-        },
-        set name(value) {
-          this._name = value;
-        },
       })}
     >
       {(formikProps) => (
