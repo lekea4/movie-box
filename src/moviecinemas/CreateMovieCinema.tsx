@@ -13,7 +13,7 @@ export default function CreateMovieCinema() {
   async function create(movieCinema: movieCinemaCreationDTO) {
     try {
       await axios.post(urlMovieCinemas, movieCinema);
-      history.push("/moviecinemas");
+      history.push("/moviecinema");
     } catch (error: any) {
       if (error && error.response) {
         setErrors(error.response.data);
